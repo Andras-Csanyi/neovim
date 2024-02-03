@@ -92,6 +92,7 @@ cmp.setup {
 	  vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
 	  vim_item.menu = ({
 		luasnip = "[Snippet]",
+		nvim_lua = "[LUA]",
 		buffer = "[Buffer]",
 		path = "[Path]"
 	  })[entry.source.name]
@@ -100,6 +101,7 @@ cmp.setup {
   },
   sources = {
 	{ name = "luasnip" },
+	{ name = "nvim_lua" },
 	{ name = "buffer" },
 	{ name = "path" },
   },
