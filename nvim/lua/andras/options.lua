@@ -1,7 +1,10 @@
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 vim.opt.backup = false
 vim.opt.clipboard = "unnamedplus"
 vim.opt.cmdheight = 2
-vim.showtabline = 2
+vim.opt.showtabline = 2
 vim.opt.smartcase = true
 vim.opt.smartindent = true
 vim.opt.swapfile = false

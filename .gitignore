@@ -6,6 +6,7 @@ htop
 iterm2
 jgit
 lvim
+nvim/plugin/packer_compiled.lua
 mc
 op
 qBittorrent

@@ -55,6 +55,24 @@ return packer.startup(function(use)
 	  style = "night"
 	},
   }
+
+  use {
+	"lervag/vimtex"
+  }
+
+  use {
+	"nvim-tree/nvim-tree.lua",
+	config = function()
+	  require("nvim-tree").setup({
+		sort = { sorter = "case_sensitive" },
+		view = { width = 60 },
+	  })
+	end
+  }
+
+  use {
+	"nvim-tree/nvim-web-devicons"
+  }
   
   if PACKER_BOOTSTRAP then
 	require("packer").sync()
