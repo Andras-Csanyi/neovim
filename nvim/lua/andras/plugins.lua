@@ -23,7 +23,6 @@ vim.cmd [[
   augroup end
 ]]
 
--- protected call 
 local status_ok, packer = pcall(require, "packer")
 if not status_ok then
   return
@@ -39,11 +38,12 @@ packer.init {
 
 return packer.startup(function(use)
 
-  -- mandatory plugins
+  -- dependencies
   use "wbthomason/packer.nvim"
   use "nvim-lua/popup.nvim"
   use "nvim-lua/plenary.nvim"
-
+  use "nvim-tree/nvim-web-devicons"
+ 
   -- colorschemes
   use "lunarvim/darkplus.nvim"
   
@@ -56,10 +56,11 @@ return packer.startup(function(use)
 	},
   }
 
-  use {
-	"lervag/vimtex"
-  }
+  ----------------------------
+  -- -- Tools and System -- --
+  ----------------------------
 
+  -- NvimTree
   use {
 	"nvim-tree/nvim-tree.lua",
 	config = function()
@@ -70,10 +71,29 @@ return packer.startup(function(use)
 	end
   }
 
+  -- CMP --
+  use "hrsh7th/nvim-cmp"
+  use "hrsh7th/cmp-buffer"
+  use "hrsh7th/cmp-path"
+  use "hrsh7th/cmp-cmdline"
+  use "saadparwaiz1/cmp_luasnip"
+
+  -- Snippets
+  use "L3MON4D3/LuaSnip"
+  use "rafamadriz/friendly-snippets"
+
+
+  ---------------------
+  -- -- Languages -- --
+  ---------------------
+
+  -- LaTeX
   use {
-	"nvim-tree/nvim-web-devicons"
+	"lervag/vimtex"
   }
-  
+
+
+ 
   if PACKER_BOOTSTRAP then
 	require("packer").sync()
   end
