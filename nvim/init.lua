@@ -1,6 +1,0 @@
-require "andras.options"
-require "andras.keymaps"
-require "andras.plugins"
-require "andras.colorscheme"
-require "andras.cmp"
-require "andras.lsp"
