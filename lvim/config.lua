@@ -23,33 +23,52 @@ lvim.builtin.nvimtree.setup.view.width = 50;
 ---------------
 
 lvim.plugins = {
-  {
-    "nvimtools/none-ls.nvim",
-    config = function ()
-      require("null-ls").setup()
-    end,
-    dependencies = { "nvim-lua/plenary.nvim" }
-  }
+    {
+        "nvimtools/none-ls.nvim",
+        config = function()
+            require("null-ls").setup()
+        end,
+        dependencies = { "nvim-lua/plenary.nvim" }
+    }
 }
 
 ---------------
 --- Linting ---
 ---------------
 
-local null_ls = require("null-ls");
-null_ls.setup({
-  sources = {
-    null_ls.builtins.diagnostics.checkstyle.with({
-      extra_args = { "-c", "google_checks.xml" },
-      filetypes = { "java" },
-      method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
-      command = "checkstyle"
-    }),
-    null_ls.builtins.formatting.prettier.with({
-      filetypes = { "json", "yaml", "grapql", "graphqls" },
-      method = null_ls.methods.FORMATTING,
-      command = "prettier"
-    })
-  }
-})
+local null_ls_status_ok, null_ls = pcall(require, "null-ls");
+if not null_ls_status_ok then
+    return
+end
 
+local formatting = null_ls.builtins.formatting;
+local diagnostics = null_ls.builtins.diagnostics;
+
+null_ls.setup({
+    sources = {
+
+        -- java
+
+        diagnostics.checkstyle.with({
+            extra_args = { "-c", "google_checks.xml" },
+            filetypes = { "java" },
+            method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
+            command = "checkstyle"
+        }),
+
+        formatting.google_java_format.with({
+            filetypes = { "java" },
+            method = null_ls.methods.FORMATTING,
+            command = "google-java-format",
+            extra_args = { "--aosp" }
+        }),
+
+        -- json, yml, graphql
+
+        formatting.prettier.with({
+            filetypes = { "json", "yaml", "grapql", "graphqls" },
+            method = null_ls.methods.FORMATTING,
+            command = "prettier"
+        })
+    }
+})
