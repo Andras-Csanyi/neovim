@@ -17,6 +17,7 @@ vim.opt.expandtab = true;
 -- Core plugin settings --
 
 lvim.builtin.nvimtree.setup.view.width = 50;
+vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "jdtls" })
 
 ---------------
 --- Plugins ---
@@ -29,6 +30,9 @@ lvim.plugins = {
             require("null-ls").setup()
         end,
         dependencies = { "nvim-lua/plenary.nvim" }
+    },
+    {
+        "mfussenegger/nvim-jdtls"
     }
 }
 
