@@ -10,10 +10,7 @@ local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
 local workspace_dir = workspace_path .. project_name
 
 -- Determine OS
-local os_config = "linux"
-if vim.fn.has "mac" == 1 then
-  os_config = "mac"
-end
+local os_config = "mac_arm"
 
 -- Setup Capabilities
 local capabilities = require("lvim.lsp").common_capabilities()
@@ -23,6 +20,7 @@ extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
 -- Setup Testing and Debugging
 local bundles = {}
 local mason_path = vim.fn.glob(vim.fn.stdpath "data" .. "/mason/")
+print(mason_path)
 vim.list_extend(bundles, vim.split(vim.fn.glob(mason_path .. "packages/java-test/extension/server/*.jar"), "\n"))
 vim.list_extend(
   bundles,
@@ -108,7 +106,7 @@ local config = {
 config["on_attach"] = function(client, bufnr)
   local _, _ = pcall(vim.lsp.codelens.refresh)
 	require("jdtls").setup_dap({ hotcodereplace = "auto" })
-	require("lvim.lsp").on_attach(client, bufnr)
+	require("lvim.lsp").common_on_attach(client, bufnr)
   local status_ok, jdtls_dap = pcall(require, "jdtls.dap")
   if status_ok then
     jdtls_dap.setup_dap_main_class_configs()

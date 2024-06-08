@@ -25,14 +25,14 @@ vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "jdtls" })
 
 lvim.plugins = {
     {
-        "nvimtools/none-ls.nvim",
-        config = function()
-            require("null-ls").setup()
-        end,
-        dependencies = { "nvim-lua/plenary.nvim" }
+        -- java stuff dependencies
+        "mfussenegger/nvim-jdtls",
+        "nvim-telescope/telescope-ui-select.nvim"
     },
     {
-        "mfussenegger/nvim-jdtls"
+        -- telescope dependencies
+        "BurntSushi/ripgrep",
+        "sharkdp/fd"
     }
 }
 
@@ -76,3 +76,12 @@ null_ls.setup({
         })
     }
 })
+
+require("telescope").setup{
+    extensions = {
+        ["ui-select"] = {
+            require("telescope.themes").get_dropdown {}
+        }
+    }
+}
+require("telescope").load_extension("ui-select")
