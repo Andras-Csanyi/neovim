@@ -20,7 +20,6 @@ extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
 -- Setup Testing and Debugging
 local bundles = {}
 local mason_path = vim.fn.glob(vim.fn.stdpath "data" .. "/mason/")
-print(mason_path)
 vim.list_extend(bundles, vim.split(vim.fn.glob(mason_path .. "packages/java-test/extension/server/*.jar"), "\n"))
 vim.list_extend(
     bundles,
