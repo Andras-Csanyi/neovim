@@ -60,13 +60,6 @@ null_ls.setup({
             command = "checkstyle"
         }),
 
-        formatting.google_java_format.with({
-            filetypes = { "java" },
-            method = null_ls.methods.FORMATTING,
-            command = "google-java-format",
-            extra_args = { "--aosp" }
-        }),
-
         -- json, yml, graphql
 
         formatting.prettier.with({
@@ -77,7 +70,7 @@ null_ls.setup({
     }
 })
 
-require("telescope").setup{
+require("telescope").setup {
     extensions = {
         ["ui-select"] = {
             require("telescope.themes").get_dropdown {}
