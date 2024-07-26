@@ -17,7 +17,7 @@ vim.opt.expandtab = true;
 -- Core plugin settings --
 
 lvim.builtin.nvimtree.setup.view.width = 50;
-vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "jdtls" })
+vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "jdtls", "texlab" })
 
 ---------------
 --- Plugins ---
@@ -33,6 +33,16 @@ lvim.plugins = {
         -- telescope dependencies
         "BurntSushi/ripgrep",
         "sharkdp/fd"
+    },
+    {
+        "lervag/vimtex",
+        init = function()
+            vim.g.vimtex_view_general_viewer = 'okular'
+            vim.g.vimtex_view_general_options = [[--unique file:@pdf\#src:@line@tex]]
+            vim.g.vimtex_quickfix_enabled = 1
+            vim.g.vimtex_syntax_enabled = 1
+            vim.g.vimtex_quickfix_mode = 0
+        end,
     }
 }
 
@@ -47,14 +57,14 @@ end
 
 local formatting = null_ls.builtins.formatting;
 local diagnostics = null_ls.builtins.diagnostics;
-
+local home = os.getenv "HOME"
 null_ls.setup({
     sources = {
 
         -- java
 
         diagnostics.checkstyle.with({
-            extra_args = { "-c", "google_checks.xml" },
+            extra_args = { "-c", home .. "/.config/lvim/java_configs/google_checks.xml" },
             filetypes = { "java" },
             method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
             command = "checkstyle"

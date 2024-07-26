@@ -65,13 +65,30 @@ local config = {
                 runtimes = {
                     {
                         name = "JavaSE-21",
-                        path = "~/.jenv/versions/zulu64-21.0.3/",
+                        path = home .. "/.jenv/versions/zulu64-21.0.3/",
                     },
                     {
                         name = "JavaSE-17",
-                        path = "~/.jenv/versions/zulu64-17.0.11/",
+                        path = home .. "/.jenv/versions/zulu64-17.0.11/",
                     },
                 },
+            },
+            completion = {
+                importOrder = {
+                    "java",
+                    "javax",
+                    "jakarta",
+                    "com",
+                    "org"
+                }
+            },
+            format = {
+
+                enabled = true,
+                settings = {
+                    profile = "Base",
+                    url = home .. "/.config/lvim/java_configs/base_formatter.xml"
+                }
             },
             maven = {
                 downloadSources = true,
@@ -89,9 +106,6 @@ local config = {
                 parameterNames = {
                     enabled = "all", -- literals, all, none
                 },
-            },
-            format = {
-                enabled = true,
             },
         },
         signatureHelp = { enabled = true },
@@ -132,21 +146,21 @@ if not status_ok then
 end
 
 local opts = {
-    mode = "n",   -- NORMAL mode
+    mode = "n",     -- NORMAL mode
     prefix = "<leader>",
-    buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
-    silent = true, -- use `silent` when creating keymaps
+    buffer = nil,   -- Global mappings. Specify a buffer number for buffer local mappings
+    silent = true,  -- use `silent` when creating keymaps
     noremap = true, -- use `noremap` when creating keymaps
-    nowait = true, -- use `nowait` when creating keymaps
+    nowait = true,  -- use `nowait` when creating keymaps
 }
 
 local vopts = {
-    mode = "v",   -- VISUAL mode
+    mode = "v",     -- VISUAL mode
     prefix = "<leader>",
-    buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
-    silent = true, -- use `silent` when creating keymaps
+    buffer = nil,   -- Global mappings. Specify a buffer number for buffer local mappings
+    silent = true,  -- use `silent` when creating keymaps
     noremap = true, -- use `noremap` when creating keymaps
-    nowait = true, -- use `nowait` when creating keymaps
+    nowait = true,  -- use `nowait` when creating keymaps
 }
 
 local mappings = {
